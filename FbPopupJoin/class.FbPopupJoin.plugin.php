@@ -53,6 +53,8 @@ $.colorbox({width:"430px", height:"470px", inline:true, href:"#tP"});
 <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F'.$FbPage.'&amp;width=342&amp;height=300&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;show_border=false&amp;header=false&amp;appId=" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:342px; height:300px;" allowtransparency="true"></iframe>
 </div></div></div>';
 }
+
+
 public function Base_Render_Before($Sender) {
       $Sender->AddCssFile($this->GetResource('design/colorbox.css', FALSE, FALSE));
       $Sender->AddJsFile($this->GetResource('js/jquery.colorbox-min.js', FALSE, FALSE));

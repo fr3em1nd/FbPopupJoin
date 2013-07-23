@@ -2,8 +2,7 @@
 
 $PluginInfo['FbPopupJoin'] = array(
    'Description' => 'Makes a popup for every visitor for the first time in the site to join your facebook community!',
-   'Version' => '1.0.1',
-   //'RequiredApplications' => array('Vanilla' => '2.0.10'),
+   'Version' => '1.0.2',
    'RequiredTheme' => FALSE, 
    'RequiredPlugins' => FALSE,
    'HasLocale' => FALSE,

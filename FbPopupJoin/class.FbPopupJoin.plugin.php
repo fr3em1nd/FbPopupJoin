@@ -22,11 +22,20 @@ class FbPopupJoinPlugin extends Gdn_Plugin {
    }
    
 
-	public function Base_AfterBody_Handler($Sender) {
-	//GET THE CONFIGURATION VALUES
-	$CookieExpiration = C('Plugin.FbPopupJoin.CookieExpiration', 30); 
-    $FbPage = C('Plugin.FbPopupJoin.FbPage','296307127079436'); 
-	//ECHO THE POPUP
+public function Base_AfterBody_Handler($Sender) {
+//GET THE CONFIGURATION VALUES
+
+if(InSection("Dashboard")) // dont render if in dashboard
+return; 
+ 
+$CookieExpiration = C('Plugin.FbPopupJoin.CookieExpiration', 30);  //30 days default settings if not set on config
+$FbPage = C('Plugin.FbPopupJoin.FbPage','296307127079436');//use my page if does not exist on config
+
+if($CookieExpiration==0 || $CookieExpiration<=1 || !isset($CookieExpiration)){ // If not set reverify to set to 30 disallow user to popup the fbpages everyday, ( avoid being greedy)
+	$CookieExpiration=30;
+}
+
+//ECHO THE POPUP
 echo '<script type="text/javascript">
 jQuery(document).ready(function(){
 if (document.cookie.indexOf(\'visited=true\') == -1) {
@@ -94,8 +103,8 @@ public function Base_Render_Before($Sender) {
       $Menu->AddLink('Add-ons', 'FB Popup', 'plugin/FbPopupJoin', 'Garden.AdminUser.Only');
    }
    public function Setup() {
-      SaveToConfig('Plugin.FbPopupJoin.CookieExpiration', 30);
-      SaveToConfig('Plugin.FbPopupJoin.FbPage', "296307127079436");
+      SaveToConfig('Plugin.FbPopupJoin.CookieExpiration', 30); //default cookie for expiration is 30 days
+      SaveToConfig('Plugin.FbPopupJoin.FbPage', "296307127079436"); // use my page if not configured
     
    }
    public function OnDisable() {
